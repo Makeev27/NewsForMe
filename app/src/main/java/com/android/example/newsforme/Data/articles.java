@@ -9,7 +9,7 @@ public class articles {
 
     @SerializedName("source")
     @Expose
-    public List<source> source;
+    public source source;
 
     @SerializedName("author")
     @Expose
@@ -32,11 +32,11 @@ public class articles {
     public String content;
 
 
-    public List<com.android.example.newsforme.Data.source> getSource() {
+    public com.android.example.newsforme.Data.source getSource() {
         return source;
     }
 
-    public void setSource(List<com.android.example.newsforme.Data.source> source) {
+    public void setSource(com.android.example.newsforme.Data.source source) {
         this.source = source;
     }
 

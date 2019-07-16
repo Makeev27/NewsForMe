@@ -1,3 +1,41 @@
 <resources>
-    <string name="app_name">NewsForMe</string>
+
+    <string name="app_name">News For You</string>
+
+    <!-- BottomNavigation English strings. -->
+    <string name="menu_science_en">Science</string>
+    <string name="menu_sport_en">Sport</string>
+    <string name="menu_world_en">World</string>
+    <string name="menu_games_en">Games</string>
+    <string name="menu_favorite_en">Favorite</string>
+
+    <!-- English titles -->
+    <string name="favorite_en">Favorite</string>
+    <string name="science_en">Science</string>
+    <string name="sport_en">Sport</string>
+    <string name="world_en">World</string>
+    <string name="games_en">Games</string>
+
+
+    <!-- BottomNavigation Russian Strings-->
+    <string name="menu_favorite_ru">Избранное</string>
+    <string name="menu_science_ru">Наука</string>
+    <string name="menu_sport_ru">Спорт</string>
+    <string name="menu_world_ru">Мир</string>
+    <string name="menu_games_ru">Игры</string>
+
+    <!-- Russian titles -->
+    <string name="favorite_ru">Избранное</string>
+    <string name="science_ru">Наука</string>
+    <string name="sport_ru">Спорт</string>
+    <string name="world_ru">Мир</string>
+    <string name="games_ru">Игры</string>
+
+
+    <!-- TopMenu -->
+    <string name="language">Language</string>
+    <string name="language_en">English</string>
+    <string name="language_ru">Русский</string>
+    <string name="top_menu">Menu</string>
+
 </resources>
