@@ -37,15 +37,23 @@
 
     </com.github.florent37.diagonallayout.DiagonalLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    </RelativeLayout>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/detailCircleImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="155dp"
+        android:background="@drawable/oval"
         android:elevation="15dp"
-        android:src="@drawable/ic_cnn"
-        android:background="@drawable/oval"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_worldwide" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -111,9 +119,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/detailDescriptionTv"
                 android:layout_width="match_parent"
@@ -130,7 +136,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center"
                 android:fontFamily="sans-serif"
-                android:padding="10dp"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="5dp"
                 android:text="Content"
                 android:textColor="@android:color/black" />
 
@@ -141,36 +148,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        >
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:padding="16dp"
+            android:paddingVertical="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <ImageButton
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/addToFavoriteButton"
+                android:src="@drawable/ic_like_empty_white"
+                android:background="@drawable/circle"
+                android:scaleType="center"/>
 
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/ic_like_empty"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_marginLeft="100dp"-->
-                <!--android:layout_marginBottom="40dp"-->
-                <!--android:id="@+id/detailFavoriteButton"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--/>-->
+            <Button
+                android:id="@+id/linkButton"
+                android:layout_width="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toEndOf="@id/addToFavoriteButton"
+                android:background="@drawable/shape"
+                android:paddingHorizontal="20dp"
+                android:text="@string/link"
+                android:textColor="@android:color/white" />
 
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/ic_external_link_symbol"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_marginLeft="70dp"-->
-                <!--android:layout_marginBottom="40dp"-->
-                <!--android:id="@+id/detailLinkButton"-->
-                <!--android:layout_toEndOf="@id/detailFavoriteButton"-->
-                <!--/>-->
         </RelativeLayout>
+
 
 
 

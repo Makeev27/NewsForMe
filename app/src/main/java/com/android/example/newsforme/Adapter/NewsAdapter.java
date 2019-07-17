@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.example.newsforme.Data.Constants;
 import com.android.example.newsforme.Data.Json_Data;
 import com.android.example.newsforme.Model.News;
 import com.android.example.newsforme.R;
@@ -63,7 +64,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 //        String posterUrl = currentNews.getPosterUrl();
 
         newsViewHolder.titleTv.setText(json_data.getArticles().get(i).getTitle());
-        if (json_data.getArticles().get(i).getContent() != null) newsViewHolder.contentTv.setText(json_data.getArticles().get(i).getContent());
+        if (json_data.getArticles().get(i).getContent() != null && Constants.LANGUAGE == false) newsViewHolder.contentTv.setText(json_data.getArticles().get(i).getContent());
         else newsViewHolder.contentTv.setText(json_data.getArticles().get(i).getDescription());
         newsViewHolder.sourceTv.setText(json_data.getArticles().get(i).getSource().getName());
         Glide.with(context)

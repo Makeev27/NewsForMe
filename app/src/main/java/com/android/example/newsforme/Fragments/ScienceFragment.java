@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.android.example.newsforme.Activities.HomeActivity;
 import com.android.example.newsforme.Adapter.NewsAdapter;
+import com.android.example.newsforme.Data.Constants;
 import com.android.example.newsforme.Data.Json_Data;
 import com.android.example.newsforme.Interface.IMyApi;
 import com.android.example.newsforme.Model.News;
@@ -76,13 +77,9 @@ public class ScienceFragment extends Fragment implements NewsAdapter.OnItemClick
         recyclerView = view.findViewById(R.id.scienceRecyclerView);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        getScienceNews();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        if (sharedPreferences.getBoolean("language", true)) {
-            getActivity().setTitle(R.string.science_ru);
+        if (Constants.LANGUAGE == true) {
             getScienceNewsRu();
-        } else if (sharedPreferences.getBoolean("language", false)) {
-            getActivity().setTitle(R.string.science_en);
+        } else if (Constants.LANGUAGE == false) {
             getScienceNews();
         }
     }
@@ -158,7 +155,6 @@ public class ScienceFragment extends Fragment implements NewsAdapter.OnItemClick
                                 bundle.putString("category", "science");
                                 bundle.putString("imageView" , imageViewUrl);
                                 bundle.putString("title" , title);
-                                bundle.putString("content" , content);
                                 bundle.putString("url", url);
                                 bundle.putString("source", source);
                                 bundle.putString("publishedAt", publishedAt);
