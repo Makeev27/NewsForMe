@@ -16,6 +16,8 @@
     <string name="world_en">World</string>
     <string name="games_en">Games</string>
 
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <!-- BottomNavigation Russian Strings-->
     <string name="menu_favorite_ru">Избранное</string>
@@ -30,7 +32,6 @@
     <string name="sport_ru">Спорт</string>
     <string name="world_ru">Мир</string>
     <string name="games_ru">Игры</string>
-
 
     <!-- TopMenu -->
     <string name="language">Language</string>

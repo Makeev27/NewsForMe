@@ -28,15 +28,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     private Context context;
     private Json_Data json_data;
     private final SparseBooleanArray array = new SparseBooleanArray();
-
+    private ArrayList<News> newsArrayList;
+    private OnItemClickListener aListener;
 
     public interface OnItemClickListener {
-        void onItemClick(News newsItem);
+        void onItemClick(int position);
     }
-    OnItemClickListener onItemClickListener;
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener listener){
+        aListener = listener;
     }
 
     public NewsAdapter(Context context, Json_Data json_data) {
@@ -55,8 +55,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int i) {
+//        News currentNews = newsArrayList.get(i);
+//
+//        String title = currentNews.getTitle();
+//        String content = currentNews.getContent();
+//        String source = currentNews.getSource();
+//        String posterUrl = currentNews.getPosterUrl();
+
         newsViewHolder.titleTv.setText(json_data.getArticles().get(i).getTitle());
-        newsViewHolder.contentTv.setText(json_data.getArticles().get(i).getContent());
+        if (json_data.getArticles().get(i).getContent() != null) newsViewHolder.contentTv.setText(json_data.getArticles().get(i).getContent());
+        else newsViewHolder.contentTv.setText(json_data.getArticles().get(i).getDescription());
         newsViewHolder.sourceTv.setText(json_data.getArticles().get(i).getSource().getName());
         Glide.with(context)
                 .load(json_data.getArticles().get(i).getUrlToImage())
@@ -95,6 +103,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             sourceTv = itemView.findViewById(R.id.sourceTv);
             posterIv = itemView.findViewById(R.id.posterIv);
             checkBox = itemView.findViewById(R.id.checkbox);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(aListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            aListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
 

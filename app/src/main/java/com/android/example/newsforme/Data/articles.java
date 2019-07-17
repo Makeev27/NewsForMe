@@ -31,6 +31,28 @@ public class articles {
     @Expose
     public String content;
 
+    @SerializedName("url")
+    @Expose
+    public String url;
+
+    @SerializedName("publishedAt")
+    @Expose
+    public String publishedAt;
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public com.android.example.newsforme.Data.source getSource() {
         return source;

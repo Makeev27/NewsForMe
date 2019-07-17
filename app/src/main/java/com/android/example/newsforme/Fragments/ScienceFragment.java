@@ -12,12 +12,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.example.newsforme.Activities.HomeActivity;
 import com.android.example.newsforme.Adapter.NewsAdapter;
 import com.android.example.newsforme.Data.Json_Data;
 import com.android.example.newsforme.Interface.IMyApi;
@@ -36,13 +38,22 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class ScienceFragment extends Fragment {
+import static android.support.constraint.Constraints.TAG;
+
+public class ScienceFragment extends Fragment implements NewsAdapter.OnItemClickListener {
 
     RecyclerView recyclerView;
     public IMyApi API;
     public CompositeDisposable compositeDisposable = new CompositeDisposable();
-    ImageView imageView;
     public ArrayList<News> newsList = new ArrayList<>();
+    String imageViewUrl;
+    String title;
+    String content;
+    String url;
+    String source;
+    String publishedAt;
+    String author;
+    String description;
 
     public void ScienceFragments() {
         // Required empty constructor for links in another fragments/activity(ies)
@@ -63,7 +74,6 @@ public class ScienceFragment extends Fragment {
         Retrofit retrofit = RetrofitClient.getInstance();
         API = retrofit.create(IMyApi.class);
         recyclerView = view.findViewById(R.id.scienceRecyclerView);
-        imageView = view.findViewById(R.id.imageView);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         getScienceNews();
@@ -84,9 +94,40 @@ public class ScienceFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Json_Data>() {
                     @Override
-                    public void accept(Json_Data json_data) throws Exception {
+                    public void accept(final Json_Data json_data) throws Exception {
                         Toast.makeText(getContext(), json_data.getStatus(), Toast.LENGTH_LONG);
-                        DisplayData(json_data);
+                        final NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
+                        recyclerView.setAdapter(adapter);
+                        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Bundle bundle = new Bundle();
+                                imageViewUrl = json_data.getArticles().get(position).getUrlToImage();
+                                title = json_data.getArticles().get(position).getTitle();
+                                content = json_data.getArticles().get(position).getContent();
+                                url = json_data.getArticles().get(position).getUrl();
+                                source = json_data.getArticles().get(position).getSource().getName();
+                                publishedAt = json_data.getArticles().get(position).getPublishedAt();
+                                author = json_data.getArticles().get(position).getAuthor();
+                                description = json_data.getArticles().get(position).getDescription();
+                                bundle.putString("category", "Science");
+                                bundle.putString("imageView" , imageViewUrl);
+                                bundle.putString("title" , title);
+                                bundle.putString("content" , content);
+                                bundle.putString("url", url);
+                                bundle.putString("source", source);
+                                bundle.putString("publishedAt", publishedAt);
+                                bundle.putString("author", author);
+                                bundle.putString("description", description);
+                                DetailFragment detailFragment = new DetailFragment();
+                                detailFragment.setArguments(bundle);
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.flContainer,detailFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                                }
+                            });
+//                        DisplayData(json_data);
                     }
                 }));
     }
@@ -98,18 +139,49 @@ public class ScienceFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Json_Data>() {
                     @Override
-                    public void accept(Json_Data json_data) throws Exception {
+                    public void accept(final Json_Data json_data) throws Exception {
                         Toast.makeText(getContext(), json_data.getStatus(), Toast.LENGTH_LONG);
-                        DisplayData(json_data);
+                        final NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
+                        recyclerView.setAdapter(adapter);
+                        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Bundle bundle = new Bundle();
+                                imageViewUrl = json_data.getArticles().get(position).getUrlToImage();
+                                title = json_data.getArticles().get(position).getTitle();
+                                content = json_data.getArticles().get(position).getContent();
+                                url = json_data.getArticles().get(position).getUrl();
+                                source = json_data.getArticles().get(position).getSource().getName();
+                                publishedAt = json_data.getArticles().get(position).getPublishedAt();
+                                author = json_data.getArticles().get(position).getAuthor();
+                                description = json_data.getArticles().get(position).getDescription();
+                                bundle.putString("category", "science");
+                                bundle.putString("imageView" , imageViewUrl);
+                                bundle.putString("title" , title);
+                                bundle.putString("content" , content);
+                                bundle.putString("url", url);
+                                bundle.putString("source", source);
+                                bundle.putString("publishedAt", publishedAt);
+                                bundle.putString("author", author);
+                                bundle.putString("description", description);
+                                DetailFragment detailFragment = new DetailFragment();
+                                detailFragment.setArguments(bundle);
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.flContainer,detailFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
+                        });
+//                        DisplayData(json_data);
                     }
                 }));
     }
 
 
-    public void DisplayData(Json_Data json_data) {
-        final NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
-        recyclerView.setAdapter(adapter);
-    }
+//    public void DisplayData(Json_Data json_data) {
+//        final NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
+//        recyclerView.setAdapter(adapter);
+//    }
 
     public void loadFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -119,4 +191,8 @@ public class ScienceFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+    }
 }

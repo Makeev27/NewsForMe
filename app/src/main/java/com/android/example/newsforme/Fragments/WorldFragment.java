@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +31,14 @@ public class WorldFragment extends Fragment {
     RecyclerView recyclerView;
     public IMyApi API;
     public CompositeDisposable compositeDisposable = new CompositeDisposable();
+    String imageViewUrl;
+    String title;
+    String content;
+    String url;
+    String source;
+    String publishedAt;
+    String author;
+    String description;
 
     public WorldFragment() {
         //Required empty constructor
@@ -68,9 +77,39 @@ public class WorldFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Json_Data>() {
                     @Override
-                    public void accept(Json_Data json_data) throws Exception {
+                    public void accept(final Json_Data json_data) throws Exception {
                         Toast.makeText(getContext(), json_data.getStatus(), Toast.LENGTH_LONG);
-                        DisplayData(json_data);
+                        final NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
+                        recyclerView.setAdapter(adapter);
+                        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Bundle bundle = new Bundle();
+                                imageViewUrl = json_data.getArticles().get(position).getUrlToImage();
+                                title = json_data.getArticles().get(position).getTitle();
+                                content = json_data.getArticles().get(position).getContent();
+                                url = json_data.getArticles().get(position).getUrl();
+                                source = json_data.getArticles().get(position).getSource().getName();
+                                publishedAt = json_data.getArticles().get(position).getPublishedAt();
+                                author = json_data.getArticles().get(position).getAuthor();
+                                description = json_data.getArticles().get(position).getDescription();
+                                bundle.putString("category", "General");
+                                bundle.putString("imageView" , imageViewUrl);
+                                bundle.putString("title" , title);
+                                bundle.putString("content" , content);
+                                bundle.putString("url", url);
+                                bundle.putString("source", source);
+                                bundle.putString("publishedAt", publishedAt);
+                                bundle.putString("author", author);
+                                bundle.putString("description", description);
+                                DetailFragment detailFragment = new DetailFragment();
+                                detailFragment.setArguments(bundle);
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.flContainer,detailFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
+                        });
                     }
                 }));
     }
@@ -81,15 +120,45 @@ public class WorldFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Json_Data>() {
                     @Override
-                    public void accept(Json_Data json_data) throws Exception {
+                    public void accept(final Json_Data json_data) throws Exception {
                         Toast.makeText(getContext(), json_data.getStatus(), Toast.LENGTH_LONG);
-                        DisplayData(json_data);
+                        final NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
+                        recyclerView.setAdapter(adapter);
+                        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Bundle bundle = new Bundle();
+                                imageViewUrl = json_data.getArticles().get(position).getUrlToImage();
+                                title = json_data.getArticles().get(position).getTitle();
+                                content = json_data.getArticles().get(position).getContent();
+                                url = json_data.getArticles().get(position).getUrl();
+                                source = json_data.getArticles().get(position).getSource().getName();
+                                publishedAt = json_data.getArticles().get(position).getPublishedAt();
+                                author = json_data.getArticles().get(position).getAuthor();
+                                description = json_data.getArticles().get(position).getDescription();
+                                bundle.putString("category", "Science");
+                                bundle.putString("imageView" , imageViewUrl);
+                                bundle.putString("title" , title);
+                                bundle.putString("content" , content);
+                                bundle.putString("url", url);
+                                bundle.putString("source", source);
+                                bundle.putString("publishedAt", publishedAt);
+                                bundle.putString("author", author);
+                                bundle.putString("description", description);
+                                DetailFragment detailFragment = new DetailFragment();
+                                detailFragment.setArguments(bundle);
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.flContainer,detailFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
+                        });
                     }
                 }));
     }
 
-    public void DisplayData(Json_Data json_data){
-        NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
-        recyclerView.setAdapter(adapter);
-    }
+//    public void DisplayData(Json_Data json_data){
+//        NewsAdapter adapter = new NewsAdapter(getContext(), json_data);
+//        recyclerView.setAdapter(adapter);
+//    }
 }

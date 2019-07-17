@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<group android:visible="true">
     <item android:id="@+id/scienceNews"
         android:title="@string/menu_science_en"
         android:icon="@drawable/ic_wb_incandescent_gray_24dp"/>
@@ -14,13 +14,23 @@
         android:icon="@drawable/ic_public_gray_24dp"/>
 
     <item android:id="@+id/videoGameNews"
-        android:title="@string/menu_world_en"
+        android:title="@string/menu_games_en"
         android:icon="@drawable/ic_gamepad_controller"/>
 
     <item android:id="@+id/favoriteNews"
         android:title="@string/menu_favorite_en"
         android:icon="@drawable/ic_favorite_gray_24dp"/>
+</group>
 
+    <item android:title="sub_items">
+        <menu>
+            <item android:title="Sub Item 1"
+                android:icon="@drawable/ic_gamepad_controller"/>
+            <item android:title="Sub Item 1"
+                android:icon="@drawable/ic_gamepad_controller"/>
+        </menu>
+
+    </item>
 
 
 </menu>

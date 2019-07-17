@@ -1,30 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context=".Activities.HomeActivity">-->
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/flContainer"-->
+        <!--/>-->
+
+    <!--&lt;!&ndash;<android.support.design.widget.BottomNavigationView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginStart="0dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginEnd="0dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:background="?android:attr/windowBackground"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:labelVisibilityMode="labeled"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:menu="@menu/nav_menu"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/bottomNavigation"&ndash;&gt;-->
+        <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+    <!--<android.support.design.widget.NavigationView-->
+        <!--android:id="@+id/nav_View"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start"-->
+        <!--app:menu="@menu/nav_menu" />-->
+
+
+
+<!--</RelativeLayout>-->
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.HomeActivity">
-
+    android:fitsSystemWindows="true"
+    tools:context=".Activities.HomeActivity"
+    tools:openDrawer="start">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/flContainer"
-        />
-
-    <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_items"
-        android:id="@+id/bottomNavigation"
-        />
+        android:layout_height="wrap_content"/>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_View"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--<ImageView-->
+                <!--android:layout_width="75dp"-->
+                <!--android:layout_height="75dp"-->
+                <!--android:layout_margin="8dp"-->
+                <!--android:src="@drawable/ic_internet"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Everyday News For You"/>-->
+
+            <!--<include layout="@layout/nav_header"></include>-->
 
 
 
-</RelativeLayout>
+        </LinearLayout>
+
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>
